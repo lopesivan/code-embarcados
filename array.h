@@ -1,7 +1,7 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 
-#include "karray.h"
+#include "kernel/karray.h"
 
 /*****************************************************************************
  *                                                                           *

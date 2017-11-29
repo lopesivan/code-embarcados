@@ -14,7 +14,7 @@ int test (int argc, char *argv[])
 
   puts("C:");
   Matrix C = NULL;
-  C = mulMatrix(A, B);
+  C = multiplyMatrix(A, B);
   printMatrix(C);
 
   destroyMatrix(A);

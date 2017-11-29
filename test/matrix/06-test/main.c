@@ -18,10 +18,10 @@ int test (int argc, char *argv[])
   randMatrix  (B);
   printMatrix (B);
 
-  printf("\ndotMatrix(A,B) = "data_fmt"\n", dotMatrix(A,B));
+  printf("\nMatDot(A,B) = "data_fmt"\n", MatDot(A,B));
 
   puts("C:");
-  Matrix C = addMatrix(A, B);
+  Matrix C = MatAdd(A, B);
   printMatrix (C);
 
   destroyMatrix(A);

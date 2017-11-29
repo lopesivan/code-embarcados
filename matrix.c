@@ -66,12 +66,12 @@ Matrix createMatrixWithDataNull(Row rows, Column columns)
 
 /*****************************************************************************
  *                                                                           *
- * ----------------------------- mulMatrix ---------------------------- *
+ * ----------------------------- multiplyMatrix ---------------------------- *
  *                                                                           *
  *****************************************************************************/
 
-Matrix mulMatrix(Matrix A,
-                 Matrix B)
+Matrix multiplyMatrix(Matrix A,
+                         Matrix B)
 {
 
     Matrix C = createMatrix(A->rows, B->columns);
@@ -260,7 +260,7 @@ void powerNMatrix ( unsigned int n, Matrix matrix )
  *                                                                           *
  *****************************************************************************/
 
-Scalar  dotMatrix  ( Matrix A, Matrix B )
+Scalar  MatDot  ( Matrix A, Matrix B )
 {
     if ( (A->rows != B->rows) || (A->columns != B->columns) )
     {
@@ -293,7 +293,7 @@ Scalar  dotMatrix  ( Matrix A, Matrix B )
  *                                                                           *
  *****************************************************************************/
 
-Matrix addMatrix ( Matrix A, Matrix B )
+Matrix MatAdd  ( Matrix A, Matrix B )
 {
     if ( (A->rows != B->rows) || (A->columns != B->columns) )
     {
@@ -308,27 +308,6 @@ Matrix addMatrix ( Matrix A, Matrix B )
     Matrix C = createMatrix(A->rows, A->columns);
 
     matrix_add ( A->data,/*Row rows, Column columns,*/
-                 B->data,/*Row rows, Column columns,*/
-                 C->data, A->rows, A->columns);
-
-    return C;
-}
-
-Matrix subMatrix ( Matrix A, Matrix B )
-{
-    if ( (A->rows != B->rows) || (A->columns != B->columns) )
-    {
-        printf("%s:In function `%s':\n" "%s:%d: %s\n",\
-           __FILE__, __FUNCTION__, __FILE__,  __LINE__,\
-           "nonconformant arguments"
-        );
-
-        exit(EXIT_FAILURE);
-    }
-
-    Matrix C = createMatrix(A->rows, A->columns);
-
-    matrix_sub ( A->data,/*Row rows, Column columns,*/
                  B->data,/*Row rows, Column columns,*/
                  C->data, A->rows, A->columns);
 
@@ -402,18 +381,6 @@ void mapMatrix (Matrix matrix, Scalar (*f)(Scalar))
 
     return;
 }
-
-void prodMatrix (Scalar scalar, Matrix matrix)
-{
-    unsigned int i;
-
-    for (i = 0; i < (matrix->rows * matrix->columns); i++)
-    {
-        *(&matrix->data[0][0] + i) = scalar * (*(&matrix->data[0][0] + i));
-    }
-
-    return;
-}
 /*
 ******************************************************************************
 
@@ -471,49 +438,23 @@ Matrix Inv ( Matrix A )
     return B;
 }
 
-Array Cross(Array a,
-            Array b)
+/*****************************************************************************
+ *                                                                           *
+ * determinantMatrix ------------------------------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+Scalar determinantMatrix ( Matrix A )
 {
-  array_t array_data_a = getData(a);
-  array_t array_data_b = getData(b);
+    if (A->rows != A->columns)
+    {
+        printf("%s:In function `%s':\n" "%s:%d: %s\n",\
+           __FILE__, __FUNCTION__, __FILE__,  __LINE__,\
+           "nonconformant arguments"
+        );
 
-  Matrix A = createMatrix(3,3);
-  Matrix B = createMatrix(3,1);
+        exit(EXIT_FAILURE);
+    }
 
-  matrix_t data_A = getDataMatrix (A);
-
-  data_A[0][1] =  - array_data_a[2];
-  data_A[0][2] =    array_data_a[1];
-  data_A[1][0] =    array_data_a[2];
-
-  data_A[1][2] =  - array_data_a[0];
-  data_A[2][0] =  - array_data_a[1];
-  data_A[2][1] =    array_data_a[0];
-
-  matrix_t data_B = getDataMatrix (B);
-
-  data_B[0][0] =  array_data_b[0];
-  data_B[1][0] =  array_data_b[1];
-  data_B[2][0] =  array_data_b[2];
-
-  printMatrix (A);
-  printMatrix (B);
-
-  Matrix C = mulMatrix(A, B);
-  Array  c = createArray(C->rows * C->columns);
-  array_t array_data_c = getData(c);
-
-  unsigned int i;
-  for (i = 0; i < (C->rows * C->columns); i++)
-  {
-      array_data_c[i] =  *(&C->data[0][0] + i);
-  }
-
-  destroyMatrix(A);
-  destroyMatrix(B);
-  destroyMatrix(C);
-
-  return c;
+    return gaussian_elimination(A->data, A->rows);
 }
-
 
