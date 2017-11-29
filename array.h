@@ -1,7 +1,14 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 
-#include "kernel/karray.h"
+#include "narray.h"
+
+typedef Scalar*              Array;
+typedef Scalar**             Matrix;
+
+typedef const unsigned long  Row;
+typedef const unsigned long  Column;
+typedef const unsigned long  Size;
 
 /*****************************************************************************
  *                                                                           *
@@ -9,36 +16,28 @@
  *                                                                           *
  *****************************************************************************/
 
-typedef struct Array_t* Array;
+void zero(Array array, Size size);
+void one(Array array, Size size);
+void two(Array array, Size size);
+void three(Array array, Size size);
+void reverse(Array array, Size size);
 
-Array createArray              (Size size);
-Array createArrayWithDataNull  (Size size);
+Scalar sum(Array array, Size size);
+Scalar seq_sum(Array array, unsigned int begin, unsigned int end, Scalar (*f)(Scalar));
+Scalar seq_product(Array array, unsigned int begin, unsigned int end, Scalar (*f)(Scalar));
+Scalar dot(Array A, Array B, Size size);
+Scalar product(Array array, Size size);
 
-void destroyArray    (Array array);
+char *new_string(const char *list_of_numbers);
+Array new_array_of_split(const char *list_of_numbers);
+void set_array_w_split_string(Array dest, const char *list_of_numbers);
+void copy_string_to_array(Array dest, char *string);
 
-void zeroArray       (Array array);
-void printArray      (Array array);
-void oneArray        (Array array);
-void twoArray        (Array array);
-void threeArray      (Array array);
-void randArray       (Array array);
-void reverseArray    (Array array);
+void print_array(Array array, Size size);
 
-Scalar sumArray      (Array array);
+void array_add(Array A, Array B, Array C, Size size);
+void array_dot(Array A, Array B, Array C, Size size);
 
-void mapArray           (Array array, Scalar (*f)(Scalar));
-Scalar seq_sumArray     (Array array, Scalar (*f)(Scalar));
-Scalar seq_productArray (Array array, Scalar (*f)(Scalar));
+Array new_array(Size size);
 
-Scalar productArray  (Array array);
-array_t getData      (Array array);
-Size    getSize      (Array array);
-
-Scalar   Dot  (Array a, Array b);
-Array    Mul  (Array a, Array b);
-Array    Add  (Array a, Array b);
-
-void toarray  (Array array, array_t data);
-
-#endif /* ARRAY_H */
-/* -*- vim: set ts=4 sw=4 tw=78 ft=header: -*- */
+#endif       /* ARRAY_H */

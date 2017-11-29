@@ -1,9 +1,12 @@
-#ifndef COMPLEX_H
-#define COMPLEX_H
+#ifndef COMPLEX
+#define COMPLEX
 
-#include "kernel/pythagoras.h"
+#include "datatype.h"
 
-#include "array.h"
+typedef struct _complex {
+    Scalar real;
+    Scalar imag;
+} Complex;
 
 /*****************************************************************************
  *                                                                           *
@@ -11,27 +14,7 @@
  *                                                                           *
  *****************************************************************************/
 
-typedef Array Complex;
+#define imagpart(cval)  (cval).imag
+#define realpart(cval)  (cval).real
 
-#define imagpart(cval)  (getRealComplex((cval))
-#define realpart(cval)  (getImgComplex((cval)))
-#define cisp(angle)     (cisComplex((angle)))
-#define cisn(angle)     (cisComplex(-(angle)))
-
-Complex createComplex(Scalar r, Scalar i);
-Complex createComplex__mag_angle(Scalar m, Scalar angle);
-Complex cisComplex(Scalar angle);
-
-Complex mulComplex(Complex A,
-                   Complex B);
-
-
-void destroyComplex(Complex complex);
-void printComplex(Complex complex);
-
-Scalar getRealComplex(Complex complex);
-Scalar getImgComplex(Complex complex);
-Scalar argComplex(Complex complex);
-Scalar magComplex(Complex complex);
-
-#endif 		/* COMPLEX_H */
+#endif       /* COMPLEX */

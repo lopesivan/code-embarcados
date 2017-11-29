@@ -1,338 +1,465 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
 #include "array.h"
 
-struct Array_t{
-    unsigned int size;
-    array_t      data;
-};
-
 /*****************************************************************************
  *                                                                           *
- * ------------------------------ createArray ------------------------------ *
+ * ---------------------------------- zero --------------------------------- *
  *                                                                           *
  *****************************************************************************/
 
-Array createArray(Size size)
+void zero(Array array, Size size)
 {
-    Array array = malloc(sizeof *array);
 
-    if is_null(array) {
-        printf("%s:In function `%s':\n" "%s:%d: %s\n", \
-           __FILE__, __FUNCTION__, __FILE__, __LINE__, \
-           "could not allocate the Array pointer"
-        );
-
-        exit(EXIT_FAILURE);
-    }
-
-    array->size   = size;
-    array->data   = new_array(size);
-
-    if is_null(array->data)
-    {
-        printf("%s:In function `%s':\n" "%s:%d: %s\n",\
-           __FILE__, __FUNCTION__, __FILE__,  __LINE__,\
-           "could not allocate Array data"
-        );
-
-        exit(EXIT_FAILURE);
-    }
-
-    return array;
-}
-/*****************************************************************************
- *                                                                           *
- * ------------------------- createArrayWithDataNu ------------------------- *
- *                                                                           *
- *****************************************************************************/
-
-Array createArrayWithDataNull(Size size)
-{
-    Array array = malloc(sizeof *array);
-
-    if is_null(array) {
-        printf("%s:In function `%s':\n" "%s:%d: %s\n", \
-           __FILE__, __FUNCTION__, __FILE__, __LINE__, \
-           "could not allocate the Array pointer"
-        );
-
-        exit(EXIT_FAILURE);
-    }
-
-    array->size   = size;
-    array->data   = NULL;
-
-    return array;
-}
-
-/*****************************************************************************
- *                                                                           *
- * ------------------------------ destroyArray ----------------------------- *
- *                                                                           *
- *****************************************************************************/
-
-void destroyArray(Array array)
-{
-    free(array->data);
-    free(array);
-
-    return;
-}
-
-/*****************************************************************************
- *                                                                           *
- * ------------------------------- zeroArray ------------------------------- *
- *                                                                           *
- *****************************************************************************/
-
-void zeroArray(Array array)
-{
-    zero(array->data, array->size);
-
-    return;
-}
-
-/*****************************************************************************
- *                                                                           *
- * ------------------------------- printArray ------------------------------ *
- *                                                                           *
- *****************************************************************************/
-
-void printArray(Array array)
-{
-    print_array(array->data, array->size);
-
-    return;
-}
-
-/*****************************************************************************
- *                                                                           *
- * -------------------------------- oneArray ------------------------------- *
- *                                                                           *
- *****************************************************************************/
-
-void oneArray(Array array)
-{
-    one(array->data, array->size);
-
-    return;
-}
-
-/*****************************************************************************
- *                                                                           *
- * -------------------------------- twoArray ------------------------------- *
- *                                                                           *
- *****************************************************************************/
-
-void twoArray(Array array)
-{
-    two(array->data, array->size);
-
-    return;
-}
-
-/*****************************************************************************
- *                                                                           *
- * ------------------------------- threeArray ------------------------------ *
- *                                                                           *
- *****************************************************************************/
-
-void threeArray(Array array)
-{
-    three(array->data, array->size);
-
-    return;
-}
-
-/*****************************************************************************
- *                                                                           *
- * ------------------------------- randArray ------------------------------- *
- *                                                                           *
- *****************************************************************************/
-
-void randArray(Array array)
-{
-    grand(array->data, array->size);
-
-    return;
-}
-
-/*****************************************************************************
- *                                                                           *
- * -------------------------------- sumArray ------------------------------- *
- *                                                                           *
- *****************************************************************************/
-
-Scalar sumArray(Array array)
-{
-    return sum(array->data, array->size);
-}
-
-/*****************************************************************************
- *                                                                           *
- * ------------------------------ seq_sumArray ----------------------------- *
- *                                                                           *
- *****************************************************************************/
-
-Scalar seq_sumArray(Array array,
-                    Scalar (*f)(Scalar))
-{
-    return seq_sum(array->data, 0, array->size, f);
-}
-
-/*****************************************************************************
- *                                                                           *
- * ---------------------------- seq_productArray --------------------------- *
- *                                                                           *
- *****************************************************************************/
-
-Scalar seq_productArray(Array array,
-                        Scalar (*f)(Scalar))
-{
-    return seq_product(array->data, 0, array->size, f);
-}
-
-/*****************************************************************************
- *                                                                           *
- * -------------------------------- mapArray ------------------------------- *
- *                                                                           *
- *****************************************************************************/
-
-void mapArray (Array array, Scalar (*f)(Scalar))
-{
     unsigned int i;
 
-    for (i = 0; i < array->size; i++)
-        array->data[i] = f(array->data[i])
-    ;
+    for (i = 0; i < size; i++)
+
+        array[i] = 0;
+
+    return;
+
+}
+
+/*****************************************************************************
+ *                                                                           *
+ * ---------------------------------- one ---------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+
+void one(Array array,
+         Size size)
+{
+
+    unsigned int i;
+
+    for (i = 0; i < size; i++)
+
+        array[i] = 1;
+
+    return;
+
+}
+
+/*****************************************************************************
+ *                                                                           *
+ * ---------------------------------- two ---------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+
+void two(Array array,
+         Size size)
+{
+
+    unsigned int i;
+
+    for (i = 0; i < size; i++)
+
+        array[i] = 2;
+
+    return;
+
+}
+
+/*****************************************************************************
+ *                                                                           *
+ * --------------------------------- three --------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+
+void three(Array array,
+           Size size)
+{
+
+    unsigned int i;
+
+    for (i = 0; i < size; i++)
+
+        array[i] = 3;
+
+    return;
+
+}
+
+/*****************************************************************************
+ *                                                                           *
+ * ---------------------------------- sum ---------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+
+Scalar sum(Array array,
+           Size size)
+{
+
+    unsigned int i;
+
+    Scalar       sum=0;
+
+    for (i = 0; i < size; i++)
+
+        sum += array[i];
+
+    return sum;
+
+}
+
+/*****************************************************************************
+ *                                                                           *
+ * ------------------------------ seq_sum ---------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+
+Scalar seq_sum(Array array,
+               unsigned int begin,
+               unsigned int end,
+               Scalar (*f)(Scalar))
+{
+
+    unsigned int i;
+
+    Scalar       sum = 0;
+
+    for (i = begin; i < end; i++)
+
+        sum += f(array[i]);
+
+    return sum;
+
+}
+
+/*****************************************************************************
+ *                                                                           *
+ * -------------------------- seq_product ---------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+
+Scalar seq_product(Array array,
+                   unsigned int begin,
+                   unsigned int end,
+                   Scalar (*f)(Scalar))
+{
+
+    unsigned int i;
+
+    Scalar       product=1;
+
+    for (i = begin; i < end; i++)
+
+        product *= f(array[i]);
+
+    return product;
+
+}
+
+/*****************************************************************************
+ *                                                                           *
+ * ---------------------------------- dot ---------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+
+Scalar dot(Array A,
+           Array B,
+           Size size)
+{
+
+    Scalar        value;
+
+    Array         C = new_array(size);
+
+    array_dot(A, B, C, size);
+
+    print_array(C,size);
+
+    value = product(C, size);
+
+    free(C);
+
+    return value;
+
+}
+
+/*****************************************************************************
+ *                                                                           *
+ * ---------------------------------- product --------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+
+Scalar product(Array array,
+               Size size)
+{
+
+    unsigned int i;
+
+    Scalar       product=1;
+
+    for (i = 0; i < size; i++)
+
+        product *= array[i];
+
+    return product;
+
+}
+
+
+/*****************************************************************************
+ *                                                                           *
+ * ------------------------------ print_array ------------------------------ *
+ *                                                                           *
+ *****************************************************************************/
+
+void print_array(Array array, Size size) {
+
+    unsigned int i;
+
+    for (i = 0; i < size; i++)
+    {
+        printf("array[%u] = " data_fmt "\n", i, array[i]);
+    }
+
+    return;
+
+}
+
+/*****************************************************************************
+ *                                                                           *
+ * ------------------------------- array_add ------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+
+void array_add(Array A,
+               Array B,
+               Array C, Size size)
+{
+
+    unsigned int i;
+
+    for (i = 0; i < size; i++)
+
+        C[i] = A[i] + B[i];
 
     return;
 }
 
 /*****************************************************************************
  *                                                                           *
- * ---------------------------------- Dot ---------------------------------- *
+ * ------------------------------- array_dot ------------------------------- *
  *                                                                           *
  *****************************************************************************/
 
-Scalar Dot(Array a,
-           Array b)
+void array_dot(Array A,
+               Array B,
+               Array C, Size size)
 {
-    if (a->size != b->size)
-    {
-        printf("%s:In function `%s':\n" "%s:%d: %s\n", \
-           __FILE__, __FUNCTION__, __FILE__, __LINE__, \
-           "Vectors of different sizes"
-        );
 
-        exit(EXIT_FAILURE);
+    unsigned int i;
+
+    for (i = 0; i < size; i++)
+
+        C[i] = A[i] * B[i];
+
+    return;
+}
+
+
+/*****************************************************************************
+ *                                                                           *
+ * --------------------------- array_reverse ------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+
+void array_reverse(Array array, Size size) {
+
+    unsigned int i,
+                 end = size - 1;
+
+    Scalar       temp;
+
+    for (i = 0; i < size/2; i++) {
+        temp       = array[i];
+        array[i]   = array[end];
+        array[end] = temp;
+
+        end--;
     }
 
-    return dot(a->data, b->data, a->size);
+    return;
+
 }
 
 /*****************************************************************************
  *                                                                           *
- * ------------------------------ productArray ----------------------------- *
+ * ------------------------------- new_array ------------------------------- *
  *                                                                           *
  *****************************************************************************/
 
-Scalar productArray(Array array)
+Array new_array(Size size)
 {
-    return product(array->data, array->size);
+
+    Array array;
+
+    array = (Array) malloc((size_t)(size) * sizeof(Scalar));
+
+    if is_null(array)
+        return NULL;
+
+    /* initialize with zero */
+    zero(array, size);
+
+    return array;
+
 }
 
 /*****************************************************************************
  *                                                                           *
- * ---------------------------------- Mul ---------------------------------- *
+ * --------------------------- new_array_of_split -------------------------- *
  *                                                                           *
  *****************************************************************************/
 
-Array Mul(Array a,
-             Array b)
+Array new_array_of_split(const char *list_of_numbers)
 {
 
-    if (a->size != b->size)
-    {
-        printf("%s:In function `%s':\n" "%s:%d: %s\n", \
-           __FILE__, __FUNCTION__, __FILE__, __LINE__, \
-           "Vectors of different sizes"
-        );
+    char          *string = new_string(list_of_numbers);
 
-        exit(EXIT_FAILURE);
+    char          **res   = NULL;
+    char          *p      = strtok(string, " ");
+
+    int           number_of_spaces = 0,
+                  i;
+
+    /*
+     * split string and append tokens to 'res'
+     */
+
+    while (p) {
+        res = realloc(res, sizeof(char *) * ++number_of_spaces);
+
+        if (res == NULL) {
+            __error("memory allocation failed");
+        }
+
+        res[number_of_spaces - 1] = p;
+
+        p = strtok(NULL, " ");
     }
 
-    Array c = createArray(a->size);
+    /*
+     * realloc one extra element for the last NULL
+     */
 
-    array_dot(a->data, b->data, c->data, a->size);
+    res = realloc(res, sizeof(char *) * (number_of_spaces + 1));
+    res[number_of_spaces] = 0;
 
-    return c;
-}
+    /*
+     * print the result
+     */
 
-/*****************************************************************************
- *                                                                           *
- * ---------------------------------- Add ---------------------------------- *
- *                                                                           *
- *****************************************************************************/
+    /*
+    for (i = 0; i < number_of_spaces; ++i)
+        printf("res[%d] = %s\n", i, res[i]);
+    */
 
-Array Add(Array a,
-             Array b)
-{
+    Array array = new_array(number_of_spaces);
 
-    if (a->size != b->size)
-    {
-        printf("%s:In function `%s':\n" "%s:%d: %s\n", \
-           __FILE__, __FUNCTION__, __FILE__, __LINE__, \
-           "Vectors of different sizes"
-        );
-
-        exit(EXIT_FAILURE);
+    for (i = 0; i < number_of_spaces; ++i) {
+        array[i] = atos(res[i]);
     }
 
-    Array c = createArray(a->size);
+    /*
+     * free the memory allocated
+     */
+    free(res);
+    free(string);
 
-    array_add(a->data, b->data, c->data, a->size);
-
-    return c;
+    return array;
 }
 
 /*****************************************************************************
  *                                                                           *
- * ------------------------------ reverseArray ----------------------------- *
+ * ------------------------ set_array_w_split_string ----------------------- *
  *                                                                           *
  *****************************************************************************/
 
-void reverseArray(Array array)
+void set_array_w_split_string(Array dest, const char *list_of_numbers)
 {
-    array_reverse(array->data, array->size);
+    char *string = new_string(list_of_numbers);
+
+    copy_string_to_array(dest, string);
+
+    /*
+     * free the memory allocated
+     */
+    free(string);
 
     return;
 }
 
 /*****************************************************************************
  *                                                                           *
- * -------------------------------- getData -------------------------------- *
+ * ------------------------------- new_string ------------------------------ *
  *                                                                           *
  *****************************************************************************/
 
-array_t getData  ( Array array )
+char *new_string(const char *list_of_numbers)
 {
-    return array->data;
+
+    char          *string;
+
+    size_t        size = strlen(list_of_numbers);
+
+    string = (char*) malloc(size + 1);
+
+    strcpy(string, list_of_numbers);
+
+    return string;
+
 }
 
 /*****************************************************************************
  *                                                                           *
- * -------------------------------- getSize -------------------------------- *
+ * -------------------------- copy_string_to_array ------------------------- *
  *                                                                           *
  *****************************************************************************/
 
-Size getSize  ( Array array )
+void copy_string_to_array(Array dest, char *string)
 {
-    return array->size;
-}
+    char          **res = NULL;
+    char          *p    = strtok(string, " ");
 
-void toarray(Array array, array_t data)
-{
-    array->data = data;
+    int           number_of_spaces = 0,
+                  i;
 
-    return;
+    /*
+    * split string and append tokens to 'res'
+    */
+
+    while (p) {
+        res = realloc(res, sizeof(char *) * ++number_of_spaces);
+
+        if (res == NULL) {
+            __error("memory allocation failed");
+        }
+
+        res[number_of_spaces - 1] = p;
+
+        p = strtok(NULL, " ");
+    }
+
+    /*
+     * realloc one extra element for the last NULL
+     */
+    res = realloc(res, sizeof(char *) * (number_of_spaces + 1));
+    res[number_of_spaces] = 0;
+
+    for (i = 0; i < number_of_spaces; ++i) {
+        dest[i] = atos(res[i]);
+    }
+
+    /*
+     * free the memory allocated
+     */
+    free(res);
+
 }
