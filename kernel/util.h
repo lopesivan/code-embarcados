@@ -7,6 +7,12 @@
  *                                                                           *
  *****************************************************************************/
 
+#define PI (atan(1)*4.0)
+
+#define TODEG(angle_in_radians)  ((angle_in_radians)*180.0/PI)
+
+#define TORAD(angle_in_degrees)  ((angle_in_degrees)*PI/180)
+
 #define SQR(a)       ((a) == 0.0 ? 0.0 : (a*a))
 
 #define CUBE(a)      ((a) == 0.0 ? 0.0 : (a*a*a))

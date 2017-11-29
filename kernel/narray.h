@@ -3,6 +3,7 @@
 
 #include "except.h"
 #include "datatype.h"
+#include "util.h"
 
 typedef Scalar*              Array1d;
 typedef Scalar**             Array2d;

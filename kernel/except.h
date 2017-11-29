@@ -1,6 +1,8 @@
 #ifndef EXCEPT_H
 #define EXCEPT_H
 
+#include "util.h"
+
 #include "hp50g.h"
 
 /*****************************************************************************

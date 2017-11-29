@@ -1,12 +1,9 @@
-#ifndef COMPLEX
-#define COMPLEX
+#ifndef PYTHAGORAS
+#define PYTHAGORAS
 
+#include "except.h"
 #include "datatype.h"
-
-typedef struct _complex {
-    Scalar real;
-    Scalar imag;
-} Complex;
+#include "util.h"
 
 /*****************************************************************************
  *                                                                           *
@@ -14,7 +11,6 @@ typedef struct _complex {
  *                                                                           *
  *****************************************************************************/
 
-#define imagpart(cval)  (cval).imag
-#define realpart(cval)  (cval).real
+Scalar pythagoras(Scalar a, Scalar b);
 
-#endif       /* COMPLEX */
+#endif       /* PYTHAGORAS */

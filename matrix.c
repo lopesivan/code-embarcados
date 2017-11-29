@@ -438,23 +438,3 @@ Matrix Inv ( Matrix A )
     return B;
 }
 
-/*****************************************************************************
- *                                                                           *
- * determinantMatrix ------------------------------------------------------- *
- *                                                                           *
- *****************************************************************************/
-Scalar determinantMatrix ( Matrix A )
-{
-    if (A->rows != A->columns)
-    {
-        printf("%s:In function `%s':\n" "%s:%d: %s\n",\
-           __FILE__, __FUNCTION__, __FILE__,  __LINE__,\
-           "nonconformant arguments"
-        );
-
-        exit(EXIT_FAILURE);
-    }
-
-    return gaussian_elimination(A->data, A->rows);
-}
-

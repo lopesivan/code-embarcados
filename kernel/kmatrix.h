@@ -91,7 +91,4 @@ Scalar Determinant  (matrix_t matrix, unsigned int n);
 void   CoFactor     (matrix_t a, unsigned int n, matrix_t b);
 void   Transpose    (matrix_t matrix, unsigned int n);
 
-Scalar gaussian_elimination (matrix_t matrix, Size order);
-void   upper_triangular     (matrix_t matrix, Size order);
-
 #endif       /* KMATRIX_H */

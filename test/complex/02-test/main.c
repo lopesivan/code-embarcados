@@ -1,18 +1,31 @@
-#include "matrix.h"
+#include "complex.h"
 
   static
 int test (int argc, char *argv[])
 {
 
-  puts("A:");
-  Matrix A = createMatrix(7, 7);
-  randMatrix   (A);
-  printMatrix  (A);
+  Complex A = createComplex__mag_angle(127, 180);
+  Complex cis = NULL;
 
-  printf("DET(A): "data_fmt"\n",Det(A));
-  printf("DET(A): "data_fmt"\n",determinantMatrix(A));
+  cis = cisp(120);
+  Array B = mulComplex(A, cis);
+  destroyComplex(cis);
 
-  destroyMatrix(A);
+  cis = cisn(120);
+  Array C = mulComplex(A, cis);
+  destroyComplex(cis);
+
+  printArray(A);
+  printArray(B);
+  printArray(C);
+
+  printComplex(A);
+  printComplex(B);
+  printComplex(C);
+
+  destroyComplex(A);
+  destroyComplex(B);
+  destroyComplex(C);
 
   return EXIT_SUCCESS;
 }
