@@ -1,0 +1,13 @@
+{
+  "*.h": {
+    "type": "inc",
+    "alternate": "{}.c"
+  },
+
+  "*.c": {
+    "type": "src",
+    "alternate": "{}.h"
+  }
+
+}
+
