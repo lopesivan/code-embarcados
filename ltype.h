@@ -11,10 +11,11 @@
  *                                                                           *
  *****************************************************************************/
 
-typedef Scalar list_t;
-/* typedef char* list_t; */
+/* typedef Scalar list_t; */
+typedef char* list_t;
 
-#define list_data_fmt          data_fmt
+/* #define list_data_fmt          "%8.4f" */
+#define list_data_fmt          "%s"
 
 #endif 		/* LTYPE_H */
 /* -*- vim: set ts=4 sw=4 tw=78 ft=header: -*- */

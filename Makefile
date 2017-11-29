@@ -1,5 +1,6 @@
 # Makefile: A standard Makefile for main.c
-CFLAGS = -g -ansi -Wall -DENABLE_INTEGER
+CFLAGS = -g -ansi -Wall
+# CFLAGS = -ansi -Wall -Werror
 
 SRCS = $(shell ls *.c)
 INCS = $(shell ls *.h)
@@ -23,14 +24,5 @@ test-1: main
 clean :
 	/bin/rm -rf $(OUT)
 	/bin/rm -rf main tags
-
-git-save-current-branch:
-	git current-branch
-
-go-scalar-is-real: git-save-current-branch
-	git co e860ef6
-
-go-scalar-is-integer: git-save-current-branch
-	git co 0e6c64c
 
 # END OF FILE

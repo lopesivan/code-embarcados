@@ -38,6 +38,18 @@ void print_list(const List *list)
 
 }
 
+void print_list_element(const ListElmt *element)
+{
+
+   list_t             *data;
+
+   data = list_data(element);
+   fprintf(stdout, "=>"list_data_fmt"\n", *data);
+
+   return;
+
+}
+
 int add(List *list, list_t value)
 {
    list_t *data;

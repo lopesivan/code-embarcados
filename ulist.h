@@ -15,6 +15,7 @@ int  rm    (List *list, ListElmt *element);
 void init  (List *list);
 void delete(List *list);
 void print_list(const List *list);
+void print_list_element(const ListElmt *element);
 
 #define lrm(list, element) \
    if (rm(&(list), (element)) == EXIT_FAILURE) \

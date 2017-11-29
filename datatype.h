@@ -9,10 +9,6 @@
     typedef enum {false=0, true=1} bool;
 #endif
 
-#ifdef ENABLE_INTEGER
-    #include "integer.h"
-#else
-    #include "real.h"
-#endif
+#include "real.h"
 
 #endif       /* DATATYPE_H */
